@@ -12,3 +12,14 @@
 
 <a href="https://colab.research.google.com/github/tamanome/satelliteBook/blob/main/" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a> 
 
+## 更新履歴
+
+### 10/12/2022
+
+`intake`を使ってのSentinel-2データが取得できない問題を修正。変更をかけたファイルは以下の通り。
+
+- 01_ch3-1DataAccess.ipynb
+- 05_ch4-2Forest.ipynb
+- 06_ch4-3Road.ipynb
+- 08_ch4-5Coast.ipynb
+
