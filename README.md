@@ -22,4 +22,5 @@
 - 05_ch4-2Forest.ipynb
 - 06_ch4-3Road.ipynb
 - 08_ch4-5Coast.ipynb
+- 11_ch6_classification.ipynb
 
