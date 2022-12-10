@@ -12,6 +12,12 @@
 
 <a href="https://colab.research.google.com/github/tamanome/satelliteBook/blob/main/" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a> 
 
+## 本書籍で用いるデータについて
+
+データは技術評論社のページからダウンロードしてください。
+
+（準備中）[ダウンロードはこちらから]()。
+
 ## 更新履歴
 
 ### 10/12/2022
