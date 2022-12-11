@@ -18,6 +18,10 @@
 
 （準備中）[ダウンロードはこちらから]()。
 
+## 修正箇所
+
+[こちらのスプレッドシート](https://docs.google.com/spreadsheets/d/1dNwlP8ZvFief8ZRS22i-b_T17BwQmhEMHpFv81cUmLc/edit?usp=sharing)が対応表となります。
+
 ## 更新履歴
 
 ### 10/12/2022
