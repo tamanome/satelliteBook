@@ -24,9 +24,34 @@
 
 ## 更新履歴
 
+### 11/12/2022
+
+11_ch6_classification.ipynbのs2folderに割り当てるパスの変更。
+
+```python
+pointfile = '/content/stratified_points.gpkg' #任意のパス
+s2folder = r'/content/s2_classification' #任意のパス
+
+randomPoints = gpd.read_file(pointfile)
+
+# 各点のピクセル値を読み取る
+for root, folders, files in os.walk(s2folder):
+    for file in files:
+        f = os.path.join(root, file)
+        if os.path.isfile(f) and f.endswith('.tif'):
+          bandRaster = rxr.open_rasterio(f).sel(band=1)
+          randomPoints_stats = pd.DataFrame(point_query
+                                            (randomPoints,\
+                                             bandRaster.values,\
+                                             affine=bandRaster.rio.transform(),\
+                                             nodata=bandRaster.rio.nodata))
+          randomPoints_stats.columns=['{0}'.format(file.split('.')[0])]
+          randomPoints = randomPoints.join(randomPoints_stats)
+```
+
 ### 10/12/2022
 
-`intake`を使ってのSentinel-2データが取得できない問題を修正。変更をかけたファイルは以下の通り。
+`intake-stac`を使ってのSentinel-2データが取得できない問題を修正。変更をかけたファイルは以下の通り。
 
 - 01_ch3-1DataAccess.ipynb
 - 05_ch4-2Forest.ipynb
@@ -34,3 +59,4 @@
 - 08_ch4-5Coast.ipynb
 - 11_ch6_classification.ipynb
 
+`intake-stack`を用いたデータの取得方日王を`pystic-client`へ変更。
