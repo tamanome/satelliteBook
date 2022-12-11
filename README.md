@@ -14,7 +14,8 @@
 
 ## 本書籍で用いるデータについて
 
-データは技術評論社のページからダウンロードしてください。
+API等を利用してデータをダウンロードする方法は紹介しているものの、本書籍で利用するデータの多くは技術評論社のページにアップロードしています。
+データは以下から適宜ダウンロードしてコードを実行してください。
 
 （準備中）[ダウンロードはこちらから]()。
 
@@ -59,4 +60,4 @@ for root, folders, files in os.walk(s2folder):
 - 08_ch4-5Coast.ipynb
 - 11_ch6_classification.ipynb
 
-`intake-stack`を用いたデータの取得方日王を`pystic-client`へ変更。
+`intake-stack`を用いたデータの取得方法を`pystic-client`へ変更。
