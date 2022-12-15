@@ -42,6 +42,20 @@ API等を利用してデータをダウンロードする方法は紹介して�
 
 ## 更新履歴
 
+### 16/12/2022
+
+GEEのPythonパッケージのアップデート：GEEのエラーは、GEE APIがアップデートされたため、GEEのPythonパッケージも同時にアップデートしないといけないことが原因でした。以下を挿入。
+
+```python
+!pip install earthengine-api --upgrade
+```
+
+GDAL関連：分類精度評価のところで、osgeoのサブモジュールが読み込まれていなかったため、下記を追加しました。
+
+```python
+ from osgeo import gdal, gdalconst, gdal_array
+```
+
 ### 11/12/2022
 
 11_ch6_classification.ipynbのs2folderに割り当てるパスの変更。
