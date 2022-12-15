@@ -15,7 +15,14 @@
 
 ## 本書籍のコードを実行する
 
-本書籍ではGoogle Colaboratoryを利用して学習を進めることを想定しています。Colabはインストールすることなしに、分析を進めることができますので、以下のブックマークレットから対象のノートブックを実行してください。
+コードを実行する上での最初のハードルは解析環境を構築することかと思います。
+解析が初めての方には、解析環境の構築が不要なGoogle Colabで解析を実行することをお勧めしています。
+解析が慣れたらご自身のパソコンへの環境構築や、Tellus等での仮想マシン構築を行うことでより高度な解析が可能になります。
+
+Google Colabで解析するためにはGoogleのアカウントが必要になります。
+Google Colabの利用方法については「Google Colab　利用方法」等で検索してください。
+
+Colabは特別な環境をインストールすることなしに分析を進めることができますので、以下のブックマークレットから対象のノートブックを実行してください。
 
 <a href="https://colab.research.google.com/github/tamanome/satelliteBook/blob/main/" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a> 
 
