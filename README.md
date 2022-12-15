@@ -44,7 +44,9 @@ API等を利用してデータをダウンロードする方法は紹介して�
 
 ### 16/12/2022
 
-GEEのPythonパッケージのアップデート：GEEのエラーは、GEE APIがアップデートされたため、GEEのPythonパッケージも同時にアップデートしないといけないことが原因でした。以下を挿入。
+**12_appendix_hcluster.ipynbの修正**：
+
+GEEのエラーは、GEE APIがアップデートされたため、GEEのPythonパッケージも同時にアップデートしないといけないことが原因でした。以下を挿入。
 
 ```python
 !pip install earthengine-api --upgrade
@@ -58,7 +60,7 @@ GDAL関連：分類精度評価のところで、osgeoのサブモジュール�
 
 ### 11/12/2022
 
-11_ch6_classification.ipynbのs2folderに割り当てるパスの変更。
+**11_ch6_classification.ipynb**のs2folderに割り当てるパスの変更。
 
 ```python
 pointfile = '/content/stratified_points.gpkg' #任意のパス
