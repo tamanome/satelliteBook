@@ -46,13 +46,13 @@ API等を利用してデータをダウンロードする方法は紹介して�
 
 **12_appendix_hcluster.ipynbの修正**：
 
-GEEのエラーは、GEE APIがアップデートされたため、GEEのPythonパッケージも同時にアップデートしないといけないことが原因でした。以下を挿入。
+GEE APIがアップデートされたため、GEEのPythonパッケージも同時にアップデートしないといけないため以下のコードを挿入。
 
 ```python
 !pip install earthengine-api --upgrade
 ```
 
-GDAL関連：分類精度評価のところで、osgeoのサブモジュールが読み込まれていなかったため、下記を追加しました。
+GDAL関連：分類精度評価のところでosgeoのサブモジュールが読み込まれていなかったため、下記を追加しました。
 
 ```python
  from osgeo import gdal, gdalconst, gdal_array
