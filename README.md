@@ -93,7 +93,7 @@ for root, folders, files in os.walk(s2folder):
 - 08_ch4-5Coast.ipynb
 - 11_ch6_classification.ipynb
 
-`intake-stack`を用いたデータの取得方法を`pystic-client`へ変更。
+`intake-stack`を用いたデータの取得方法を`pystac-client`へ変更。
 
 ## 注意事項
 
