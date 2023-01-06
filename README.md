@@ -42,6 +42,33 @@ API等を利用してデータをダウンロードする方法は紹介して�
 
 ## 更新履歴
 
+### 06/01/2023
+
+**07_ch4-4Agri.ipynbの修正**：
+
+- EVIが意図せぬ計算結果になっていたため`modisEviTiff`のクラスを修正。
+
+- 筆ポリゴンのCRSが変更されており読み込みができないエラーを修正。
+
+```python
+from fiona.crs import from_epsg
+gdf = gpd.GeoDataFrame(pd.concat([gpd.read_file(path,encoding='Shift_JIS') for path in filepaths],\
+                                 ignore_index=True))
+gdf = gdf.to_crs(crs="epsg:32654") # CRSの変更
+```
+
+以上を下に変更。
+
+```python
+shpList = []
+for file in filepaths:
+  gdf = gpd.read_file(file,encoding='shift_jis')
+  gdf = gdf.to_crs(crs="epsg:32654") # CRSの変更
+  shpList.append(gdf)
+  
+gdf = gpd.GeoDataFrame(pd.concat(shpList,ignore_index=True))
+```
+
 ### 16/12/2022
 
 **12_appendix_hcluster.ipynbの修正**：
