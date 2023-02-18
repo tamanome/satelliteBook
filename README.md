@@ -42,6 +42,20 @@ API等を利用してデータをダウンロードする方法は紹介して�
 
 ## 更新履歴
 
+### 18/02/2023
+
+**03_ch3-3GDAL.ipynbの修正：**
+
+```python
+import gdal
+```
+
+上記インポート方法を下記に修正。
+
+```python
+from osgeo import gdal
+```
+
 ### 11/02/2023
 
 **02_ch3-2Coordinate.ipynbの修正**：
