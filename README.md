@@ -42,6 +42,31 @@ API等を利用してデータをダウンロードする方法は紹介して�
 
 ## 更新履歴
 
+### 20/06/2023
+
+**01_ch3-1DataAccess.ipynbの修正：**
+
+クライアントオブジェクトのconforms_toを更新した。
+
+```python
+from pystac_client import Client
+api_url = 'https://earth-search.aws.element84.com/v0'
+collection = "sentinel-s2-l2a-cogs"  # Sentinel-2, Level 2A (BOA)
+s2STAC = Client.open(api_url, headers=[])
+```
+
+上記セルに対して`s2STAC.add_conforms_to("ITEM_SEARCH")`を追加。
+
+```python
+from pystac_client import Client
+api_url = 'https://earth-search.aws.element84.com/v0'
+collection = "sentinel-s2-l2a-cogs"  # Sentinel-2, Level 2A (BOA)
+s2STAC = Client.open(api_url, headers=[])
+s2STAC.add_conforms_to("ITEM_SEARCH")
+```
+
+`pystac_client`を利用している全てのノートブックも併せて修正した。
+
 ### 02/04/2023
 
 **09_ch5-1linear.ipynbの修正：**
