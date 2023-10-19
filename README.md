@@ -42,6 +42,43 @@ API等を利用してデータをダウンロードする方法は紹介して�
 
 ## 更新履歴
 
+### 19/10/2023
+
+**01_ch3-1DataAccess.ipynbの修正：**
+
+`goal.Translate`パラメータ修正。
+
+```python
+gdal.Translate(imgJpg,
+               imgTif,
+               format='JPEG',
+               scaleParams=[[0, 5000, 0, 255]],
+               outputType=gdal.GDT_Byte, 
+               bandList=[3,2,1])
+# scaleParamsの部分は空白[[]]でも動作します。その場合は、gdal.Translateが自動で最適なコントラストに設定しますが、多くの場合手動でやるほうが良い結果になります
+im = Image.open('Masked_' +str(object_name) +'.jpg')
+im = Image.open('/content/Masked_Tokyo_Bay.jpg')
+im
+```
+
+STAC itemのプロパティ名が変更されたので修正した。また波長の名称も変更されていたため、それについても修正を行なった。
+
+```python
+# 最も雲の量が少ないシーンを選択し、サムネイル画像も取得する関数を定義します。
+def sel_items(scene_items, product_id):
+ item = [x.assets for x in scene_items\
+         if x.properties['s2:granule_id'] == product_id]
+ thumbUrl = [x.assets['thumbnail'].href for x in scene_items\
+             if x.properties['s2:granule_id'] == product_id]
+ return item, thumbUrl
+
+selected_item, thumbUrl = sel_items(items, dfSorted['s2:granule_id'][0])
+print(thumbUrl)
+print(selected_item)
+```
+
+また、ノートブック内の説明についても若干更新を行なった。
+
 ### 20/06/2023
 
 **01_ch3-1DataAccess.ipynbの修正：**
