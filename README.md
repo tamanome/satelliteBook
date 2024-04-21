@@ -42,6 +42,134 @@ API等を利用してデータをダウンロードする方法は紹介して�
 
 ## 更新履歴
 
+### 21/04/2024
+
+02_ch3-2Coordinate.ipynbの修正：
+
+(1) No module named 'geetools.ui'のエラーの修正
+
+`from ipygee import *`がNo module named 'geetools.ui'を引き起こすため、本パッケージの利用を削除。
+
+(2) マップにテキストの重畳がうまくいかないエラーを修正
+
+```python
+# 日本のシェープデータを可視化する
+ax = jpnShp.plot(figsize=(14, 14))
+jpnShp.apply(lambda x: ax.annotate(s=x.NAME_1, xy=x.geometry.centroid.coords[0], ha='center', color = 'black', size = 6),axis=1)
+jpnShp.plot(ax = ax, edgecolors='black')
+plt.title('Administrative level 1 map in Japan', fontsize=16)
+plt.show();
+```
+
+上記を以下に修正
+
+```python
+# 日本のシェープデータを可視化する
+ax = jpnShp.plot(figsize=(14, 14))
+jpnShp.apply(lambda x: ax.annotate(text=x.NAME_1, xy=x.geometry.centroid.coords[0], ha='center', color = 'black', size = 6),axis=1)
+jpnShp.plot(ax = ax, edgecolors='black')
+plt.title('Administrative level 1 map in Japan', fontsize=16)
+plt.show();
+```
+
+同様に以下のセルも修正
+
+```python
+# 男性
+# 方位の作成についての参考記事：
+## https://mohammadimranhasan.com/geospatial-data-mapping-with-python/
+combDf2019M = combDf.loc[(combDf.year == 2019)&(combDf.sex == 'male'),:].reset_index(drop=True).copy()
+ax = combDf2019M.plot(figsize=(16, 16))
+scalebar = ScaleBar(100, location='lower right',units='km')
+# ax.add_artist(ScaleBar(distance_meters))
+ax.add_artist(scalebar) # 200km
+ax.text(x=153.215-0.55, y=40.4, s='N', fontsize=30) # North Arrow
+ax.arrow(153.215, 39.36, 0, 1, length_includes_head=True,
+          head_width=0.8, head_length=1.5, overhang=.1, facecolor='k') # North Arrow
+combDf2019M.apply(lambda x: ax.annotate(text=x.NAME_1, xy=x.geometry.centroid.coords[0], ha='center', color = 'black', size = 6),axis=1)
+combDf2019M.plot(column='avgAge', cmap = 'rainbow', edgecolors='black', ax = ax, legend=True,legend_kwds={'label': "Average age of first marriage",'orientation': "vertical"})
+plt.title('The Average Age of First Marriage among Males by Prefectures in 2019', fontsize=16)
+plt.show();
+```
+
+`combDf2019M.apply(lambda x: ax.annotate(text=x.NAME_1, xy=x.geometry.centroid.coords[0], ha='center', color = 'black', size = 6),axis=1)`へ修正している。
+
+```python
+# 女性
+combDf2019F = combDf.loc[(combDf.year == 2019)&(combDf.sex == 'female'),:].reset_index(drop=True).copy()
+ax = combDf2019F.plot(figsize=(16, 16))
+scalebar = ScaleBar(100, location='lower right',units='km')
+ax.add_artist(scalebar) # 500km
+ax.text(x=153.215-0.55, y=40.4, s='N', fontsize=30) # North Arrow
+ax.arrow(153.215, 39.36, 0, 1, length_includes_head=True,
+          head_width=0.8, head_length=1.5, overhang=.1, facecolor='k') # North Arrow
+combDf2019F.apply(lambda x: ax.annotate(text=x.NAME_1, xy=x.geometry.centroid.coords[0], ha='center', color = 'black', size = 6),axis=1)
+combDf2019M.plot(column='avgAge', cmap = 'rainbow', edgecolors='black', ax = ax, legend=True,legend_kwds={'label': "Average age of first marriage",'orientation': "vertical"})
+plt.title('The Average Age of First Marriage among Females by Prefectures in 2019', fontsize=16)
+plt.show();
+```
+
+同様に、`ax.annotate()`部分を修正した。
+
+```python
+combDf2019M = combDf.loc[(combDf.year == 2019)&(combDf.sex == 'male'),:].reset_index(drop=True).copy()
+diffAge = pd.Series(combDf2019M.avgAge - combDf2015M.avgAge, dtype='float', name='diffAge')
+# diff20152019 = pd.concat([combDf2019M, diffAge], axis=1)
+combDf2019M['diffAge'] = diffAge
+# 男性
+# 方位の作成についての参考記事：
+## https://mohammadimranhasan.com/geospatial-data-mapping-with-python/
+ax = combDf2019M.plot(figsize=(16, 16))
+scalebar = ScaleBar(100, location='lower right',units='km')
+ax.add_artist(scalebar) # 500km
+ax.text(x=153.215-0.55, y=40.4, s='N', fontsize=30) # North Arrow
+ax.arrow(153.215, 39.36, 0, 1, length_includes_head=True,
+          head_width=0.8, head_length=1.5, overhang=.1, facecolor='k') # North Arrow
+combDf2019M.apply(lambda x: ax.annotate(text=x.NAME_1, xy=x.geometry.centroid.coords[0], ha='center', color = 'black', size = 6),axis=1)
+combDf2019M.plot(column='diffAge', cmap = 'rainbow', edgecolors='black', ax = ax, legend=True,legend_kwds={'label': "Average age of first marriage",'orientation': "vertical"})
+plt.title('Difference in the average age at first marriage\n among males by prefectures between in 2015 and in 2019', fontsize=16)
+plt.show();
+```
+
+こちらも、`ax.annotate()`を修正。
+
+(3)本セクションで必要なデータの更新
+
+二つのベクターデータの結合にて利用する、筆ポリゴンのダウンロードリンクが変更されたため、該当データを[GoogleDrive](https://drive.google.com/drive/folders/13IU7dl2QpHCKqEUNXynUhjufX45hIfUY?usp=drive_link)に格納した。過去データの筆ポリゴンはshp形式でしか与えられていないため、`ogr2ogr`を用いてgeojson形式へと変更している。変換コードについては以下の通りである。
+
+```bash
+ogr2ogr -f GeoJSON tsuruoka.geojson 06203鶴岡市（2021公開）_5.shp -oo ENCODING=CP932
+```
+
+併せてセルのコマンドについても修正を行った。
+
+```python
+tsuruoka_path = "/content/drive/MyDrive/Colab Notebooks/書籍notebooks/data/tsuruoka.geojson"
+fudeShounai = gpd.read_file(tsuruoka_path, encoding='cp932')
+fudeShounai.head()
+```
+
+`gpd.read_file()`にencodingを追加した。
+
+(4)geemap利用時のデータ重畳における不具合の修正
+
+従来は、espg:4326に変換することなく実装できていたが、データ変更に伴い修正が必要となった。
+
+```python
+mergedGdf.drop(columns={'area_ha_1','耕地の種類','area_ha_2'},inplace=True) # 余計な列の削除
+# Convert 6691 to 4326 for using geemap
+mergedGdf.to_crs('epsg:4326',inplace=True) # 追加行
+mergedGdf.to_file("/content/drive/MyDrive/Colab Notebooks/書籍notebooks/data/mergedShounai_4326.geojson", crs="epsg:4326") # GeoPandasをgeojsonとして保存
+```
+
+また、Earth Engineは書籍出版時とは仕様が異なり、クラウドプロジェクトを割り当てる必要がある。詳しくは[公式のガイダンス](https://developers.google.com/earth-engine/guides/auth)を参照のこと。
+
+```python
+import ee
+ee.Authenticate()
+ee.Initialize(project='ee-tamakisoranome')
+```
+
 ### 09/04/2024
 
 **01_ch3-1DataAccess.ipynbの修正：**
